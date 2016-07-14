@@ -1,5 +1,5 @@
 
-colors <- c("#d6d6d6", "#ff0000", "#00ff00", "#0000ff", "#ff33cc", "#cc33ff", "#ffff00", "#ff9933", "#00ffff", "#cc6600", "#cc3300", "#cc3300", "#009933")
+# colors <- c("#d6d6d6", "#ff0000", "#00ff00", "#0000ff", "#ff33cc", "#cc33ff", "#ffff00", "#ff9933", "#00ffff", "#cc6600", "#cc3300", "#cc3300", "#009933")
 
 ##########################################################################
 #This function generates a table that gather all data about one strain for all medium
@@ -88,7 +88,7 @@ generateGraphByStrain <- function(time2, strain, mediumList, dataset) {
   mediumColor <- c()
   
   for (medium in mediumList){
-    mediumColor[medium] <- colors[i]
+    mediumColor[medium] <- myColors[i]
     i <- i+1
   }
   
@@ -118,7 +118,7 @@ generateGraphByMedium <- function(time2, medium, strainList, dataset) {
   strainColor <- c()
   
   for (strain in strainList){
-    strainColor[strain] <- colors[i]
+    strainColor[strain] <- myColors[i]
     i <- i+1
   }
   
@@ -163,6 +163,7 @@ init <- function(input, strainList, mediumList) {
     }
     graphByStrain <- generateGraphByStrain(time2, strain, mediumList, datasetByStrain)
     print (graphByStrain)
+    ggsave(file=paste0("graphs/",strain,".svg"), plot=graphByStrain, width=10, height=8)
   }
   
   for (medium in mediumList) {
@@ -174,6 +175,7 @@ init <- function(input, strainList, mediumList) {
   
     graphByMedium <- generateGraphByMedium(time2, medium, strainList, datasetByMedium)
     print (graphByMedium)
+    ggsave(file=paste0("graphs/",medium,".svg"), plot=graphByMedium, width=10, height=8)
   }
 }
 

@@ -4,15 +4,16 @@
 #Script to analyse Bioscreen data output
 
 library("ggplot2");
-library("gridExtra");
-library("dplyr");
-#library("plotrix");
+library("foreach");
 
 source("fonction.R")
+source("config.R")
 
-input <- read.csv("./data/kdb.csv", header=FALSE, dec = ".", stringsAsFactors=FALSE)
-strainList <- list("3936","4050","3986", "4097", "4096", "3700", "4160", "4255")
-mediumList <- list("mgg", "mggl", "mggls")
+strainList <- getStrainList()
+mediumList <- getMediumList()
+inputFile <- getInputFile()
+
+input <- read.csv(inputFile, header=FALSE, dec = ".", stringsAsFactors=FALSE)
 
 init(input, strainList, mediumList)
 
