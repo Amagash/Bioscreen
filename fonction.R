@@ -1,6 +1,3 @@
-
-# colors <- c("#d6d6d6", "#ff0000", "#00ff00", "#0000ff", "#ff33cc", "#cc33ff", "#ffff00", "#ff9933", "#00ffff", "#cc6600", "#cc3300", "#cc3300", "#009933")
-
 ##########################################################################
 #This function generates a table that gather all data about one strain for all medium
 #raw input -> generateStrainTable
@@ -96,7 +93,7 @@ generateGraphByStrain <- function(time2, strain, mediumList, dataset) {
     xlab("hours") + 
     ylab("OD(600)") + 
     ggtitle(paste(strain, "growth in different media"))+
-    coord_cartesian(xlim=c(0,120), ylim=c(0,.75)) + 
+    coord_cartesian(xlim=c(0,30), ylim=c(0,.75)) + 
     theme_bw() +
     theme(legend.key = element_blank(), aspect.ratio=1,  panel.grid.minor=element_blank(), panel.grid.major=element_blank()) +
     scale_color_manual(name="media", values=mediumColor)
@@ -125,7 +122,7 @@ generateGraphByMedium <- function(time2, medium, strainList, dataset) {
   mediumplot <- ggplot(dataset, aes(x=time2)) +
     xlab("hours") +
     ylab("OD(600)")+ 
-    ggtitle(paste(medium, "lala"))+
+    ggtitle(paste("Growth of different strains in", medium))+
     coord_cartesian(xlim=c(0,30), ylim=c(0,.75)) +
     theme_bw() +
     theme(legend.key = element_blank(), aspect.ratio=1,  panel.grid.minor=element_blank(), panel.grid.major=element_blank())+
@@ -142,8 +139,27 @@ generateGraphByMedium <- function(time2, medium, strainList, dataset) {
   return(mediumplot)
 }
 ############################################################################
-#Create a table with all means and std for one strain
+#Create all plot for all strains. Each plot is a plot by strain with growth in all media
 
+# summaryPlotStrain <- function(input, strainList, mediumList){
+#   
+#   time <- input[, 1]
+#   time2 <- as.numeric(as.character(time [3:length(time)]))
+#   
+#   a <- masterSummary (input, strainList, mediumList, time)
+#   data <- data.frame ()
+#   
+#   for (strain in strainList) {
+#     datasetByStrain <- data.frame(time2)
+#     for (medium in mediumList) {
+#       datasetByStrain[,paste0(strain, medium, ".mean")]<-a[[paste0(strain, medium)]]$`mean`
+#       datasetByStrain[,paste0(strain, medium, ".std")]<-a[[paste0(strain, medium)]]$`std`
+#     }
+#     graphByStrain <- generateGraphByStrain(time2, strain, mediumList, datasetByStrain)
+#     print (graphByStrain)
+#   }
+#   return 
+# }
 
 ############################################################################
 init <- function(input, strainList, mediumList) {
@@ -152,9 +168,8 @@ init <- function(input, strainList, mediumList) {
   time2 <- as.numeric(as.character(time [3:length(time)]))
   
   a <- masterSummary (input, strainList, mediumList, time)
-  
-  
-  
+
+#generate graphs for all strains. Each graphs is the growth of one strain in all media
   for (strain in strainList) {
     datasetByStrain <- data.frame(time2)
     for (medium in mediumList) {
@@ -165,7 +180,7 @@ init <- function(input, strainList, mediumList) {
     print (graphByStrain)
     ggsave(file=paste0("graphs/",strain,".svg"), plot=graphByStrain, width=10, height=8)
   }
-  
+#generate graphs for all media. Each graphs is the growth of all strains in one medium
   for (medium in mediumList) {
     datasetByMedium <- data.frame(time2)
     for (strain in strainList) {
@@ -177,5 +192,5 @@ init <- function(input, strainList, mediumList) {
     print (graphByMedium)
     ggsave(file=paste0("graphs/",medium,".svg"), plot=graphByMedium, width=10, height=8)
   }
-}
+ }
 
