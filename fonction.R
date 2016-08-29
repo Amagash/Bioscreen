@@ -44,6 +44,7 @@ generateMediumTable <- function (input, medium, time){
 summaryReplicate <- function (input, time){
     convertToMatrix <- data.frame(data.matrix(input[3:length(time),]))
     time2 <- time [3:length(time)]
+    
     stdbis <- transform(convertToMatrix, SD=apply(convertToMatrix,1, sd, na.rm = FALSE))
     std <- stdbis[, length(stdbis)]
     mean <- rowMeans(convertToMatrix)
