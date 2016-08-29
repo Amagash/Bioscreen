@@ -42,8 +42,10 @@ generateMediumTable <- function (input, medium, time){
 ##raw input -> generateStrainTable -> generateMediumTable -> summaryReplicate
 
 summaryReplicate <- function (input, time){
-    convertToMatrix <- data.frame(data.matrix(input[3:length(time),]))
-    time2 <- time [3:length(time)]
+    
+    convertToMatrix <- data.frame(as.matrix(input[4:length(time),]))
+    time2 <- time [4:length(time)]
+    
     stdbis <- transform(convertToMatrix, SD=apply(convertToMatrix,1, sd, na.rm = FALSE))
     std <- stdbis[, length(stdbis)]
     mean <- rowMeans(convertToMatrix)
@@ -83,7 +85,7 @@ masterSummary <- function (input, strainList, mediumList, time){
 generateGraphByStrain <- function(time2, strain, mediumList, dataset) {
   i <- 1
   mediumColor <- c()
-  
+  browser()
   for (medium in mediumList){
     mediumColor[medium] <- myColors[i]
     i <- i+1
@@ -111,7 +113,7 @@ generateGraphByStrain <- function(time2, strain, mediumList, dataset) {
 #generate all growth curve of all strains in the same medium
 
 generateGraphByMedium <- function(time2, medium, strainList, dataset) {
-   i <- 1
+  i <- 1
   strainColor <- c()
   
   for (strain in strainList){
@@ -163,9 +165,10 @@ generateGraphByMedium <- function(time2, medium, strainList, dataset) {
 
 ############################################################################
 init <- function(input, strainList, mediumList) {
-  
+  browser()
   time <- input[, 1]
-  time2 <- as.numeric(as.character(time [3:length(time)]))
+  # time2 <- as.numeric(as.character(time [3:length(time)]))
+  time2 <- time [4:length(time)]
   
   a <- masterSummary (input, strainList, mediumList, time)
 
