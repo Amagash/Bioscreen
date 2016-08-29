@@ -3,8 +3,7 @@
 
 #Script to analyse Bioscreen data output
 
-library("ggplot2");
-
+library("ggplot2")
 source("fonction.R")
 source("config.R")
 
