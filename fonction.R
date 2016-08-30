@@ -94,7 +94,7 @@ generateGraphByStrain <- function(time2, strain, mediumList, dataset) {
     xlab("hours") + 
     ylab("OD(600)") + 
     ggtitle(paste(strain, "growth in different media"))+
-    coord_cartesian(xlim=c(0,30), ylim=c(0,.75)) + 
+    coord_cartesian(xlim=c(0,50), ylim=c(0,.90)) + 
     theme_bw() +
     theme(legend.key = element_blank(), aspect.ratio=1,  panel.grid.minor=element_blank(), panel.grid.major=element_blank()) +
     scale_color_manual(name="media", values=mediumColor)
@@ -124,7 +124,7 @@ generateGraphByMedium <- function(time2, medium, strainList, dataset) {
     xlab("hours") +
     ylab("OD(600)")+ 
     ggtitle(paste("Growth of different strains in", medium))+
-    coord_cartesian(xlim=c(0,30), ylim=c(0,.75)) +
+    coord_cartesian(xlim=c(0,50), ylim=c(0,.90)) +
     theme_bw() +
     theme(legend.key = element_blank(), aspect.ratio=1,  panel.grid.minor=element_blank(), panel.grid.major=element_blank())+
     scale_color_manual(name="Strains", values=strainColor)

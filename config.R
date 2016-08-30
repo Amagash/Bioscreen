@@ -1,7 +1,18 @@
 source("input.R")
 
-defaultColors <- c("#d6d6d6", "#ff0000", "#00ff00", "#0000ff", "#ff33cc", "#cc33ff", "#ffff00", "#ff9933", "#00ffff", "#cc6600", "#cc3300", "#cc3300", "#009933")
+defaultColors <- c("#ff0000", "#0000ff", "#008000", "#ffff00", "#ffc0cb", "#ff00ff", "#ffa500", "#a52a2a")
 myColors <<- c()
+
+#Just a reminder of codes for colors
+# red = "#ff0000"
+# blue = "#0000ff"
+# green = "##008000"
+# yellow = "#ffff00"
+# pink = "#ffc0cb"
+# purple = "#800080"
+# fuchsia = "#ff00ff"
+# orange = "#ffa500"
+# brown = "#a52a2a"
 
 getInputFile <- function() {
   return(inputFile)
